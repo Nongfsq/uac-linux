@@ -11,7 +11,7 @@ jobs:
   check:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Rust toolchain
         run: rustup update stable && rustup default stable && rustup component add rustfmt clippy
       - name: Gate self-test
@@ -22,6 +22,6 @@ jobs:
   dependencies:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Licenses and security advisories
         uses: EmbarkStudios/cargo-deny-action@v2
