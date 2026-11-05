@@ -1,0 +1,10 @@
+[Unit]
+Description=uac-linux: check every minute for an expired temporary sudo grant
+Documentation=https://github.com/Nongfsq/uac-linux
+
+[Timer]
+OnCalendar=minutely
+AccuracySec=5s
+
+[Install]
+WantedBy=timers.target

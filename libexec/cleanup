@@ -1,0 +1,3 @@
+#!/bin/sh
+# uac-linux: fixed entry point for 'cleanup' (pkexec matches this exact path).
+exec /usr/local/libexec/uac-linux/uac-helper cleanup "$@"

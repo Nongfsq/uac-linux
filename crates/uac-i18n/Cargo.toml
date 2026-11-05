@@ -1,0 +1,18 @@
+[package]
+name = "uac-i18n"
+description = "Translations of uac-linux (Fluent), one .ftl file per language"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+uac-core.workspace = true
+jiff.workspace = true
+i18n-embed.workspace = true
+i18n-embed-fl.workspace = true
+rust-embed.workspace = true
+
+[lints]
+workspace = true

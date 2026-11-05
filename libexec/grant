@@ -1,0 +1,3 @@
+#!/bin/sh
+# uac-linux: fixed entry point for 'grant' (pkexec matches this exact path).
+exec /usr/local/libexec/uac-linux/uac-helper grant "$@"

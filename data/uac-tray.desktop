@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=uac-linux
+Name[zh_CN]=临时免密 sudo
+Comment=Top-bar switch for time-limited passwordless sudo
+Comment[zh_CN]=在顶栏开启或关闭限时免密 sudo
+Exec=/usr/local/bin/uac-tray
+Icon=uac-linux
+Terminal=false
+Categories=System;Settings;
+OnlyShowIn=GNOME;Unity;
+X-GNOME-Autostart-enabled=true

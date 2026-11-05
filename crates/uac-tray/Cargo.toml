@@ -1,0 +1,18 @@
+[package]
+name = "uac-tray"
+description = "uac-tray: GNOME top-bar indicator for uac-linux (StatusNotifierItem)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+uac-core.workspace = true
+uac-i18n.workspace = true
+jiff.workspace = true
+ksni.workspace = true
+notify-rust.workspace = true
+
+[lints]
+workspace = true

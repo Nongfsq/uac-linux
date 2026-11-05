@@ -1,0 +1,14 @@
+# Weekly update PRs for Rust crates and GitHub Actions; each runs the full CI gate.
+version: 2
+updates:
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      crates:
+        patterns: ["*"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

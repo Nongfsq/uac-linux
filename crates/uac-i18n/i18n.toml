@@ -1,0 +1,6 @@
+# Fluent translations. Every message must exist in the fallback language;
+# a test checks that every other language has exactly the same messages.
+fallback_language = "en-US"
+
+[fluent]
+assets_dir = "i18n"

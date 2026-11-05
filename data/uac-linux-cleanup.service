@@ -1,0 +1,13 @@
+[Unit]
+Description=uac-linux: remove an expired temporary sudo grant
+Documentation=https://github.com/Nongfsq/uac-linux
+# Runs once at boot (before logins) and every minute from the timer.
+Before=systemd-user-sessions.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/libexec/uac-linux/cleanup
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target

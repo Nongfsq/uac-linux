@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>uac-linux</vendor>
+  <vendor_url>https://github.com/Nongfsq/uac-linux</vendor_url>
+
+  <!-- Granting asks for the password every time (auth_admin, not auth_admin_keep). -->
+  <action id="io.github.nongfsq.uac-linux.grant">
+    <description>Grant temporary passwordless sudo</description>
+    <description xml:lang="zh_CN">开启临时免密 sudo</description>
+    <message>Authentication is required to let your account use sudo without a password for a limited time</message>
+    <message xml:lang="zh_CN">要让你的账户在一段时间内免密使用 sudo，需要验证身份</message>
+    <icon_name>uac-linux</icon_name>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/libexec/uac-linux/grant</annotate>
+  </action>
+
+  <!-- Revoking only removes privilege, so the local active session may do it without a password. -->
+  <action id="io.github.nongfsq.uac-linux.revoke">
+    <description>Revoke temporary passwordless sudo</description>
+    <description xml:lang="zh_CN">关闭临时免密 sudo</description>
+    <message>Revoke temporary passwordless sudo</message>
+    <message xml:lang="zh_CN">关闭临时免密 sudo</message>
+    <icon_name>uac-linux</icon_name>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>yes</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/libexec/uac-linux/revoke</annotate>
+  </action>
+</policyconfig>
