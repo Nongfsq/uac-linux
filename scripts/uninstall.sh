@@ -15,9 +15,11 @@ echo "==> Removing files"
 sudo systemctl disable --now uac-linux-cleanup.timer uac-linux-cleanup.service >/dev/null 2>&1 || true
 sudo rm -f /etc/systemd/system/uac-linux-cleanup.timer /etc/systemd/system/uac-linux-cleanup.service
 sudo systemctl daemon-reload
+systemctl --user stop uac-tray.service 2>/dev/null || true
 pkill -u "$(id -un)" -x uac-tray 2>/dev/null || true
 pkill -u "$(id -un)" -f '/usr/local/bin/uac-tray' 2>/dev/null || true
 sudo rm -f /usr/local/bin/uac /usr/local/bin/uac-tray /usr/share/applications/uac-tray.desktop \
+  /etc/systemd/user/uac-tray.service \
   /usr/share/polkit-1/actions/io.github.nongfsq.uac-linux.policy /etc/uac-linux.conf
 sudo rm -rf /usr/local/libexec/uac-linux /var/lib/uac-linux  # helper, entry points, state
 sudo rm -f /usr/share/icons/hicolor/scalable/apps/uac-linux.svg \

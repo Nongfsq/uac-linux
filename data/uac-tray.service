@@ -1,0 +1,12 @@
+[Unit]
+Description=uac-linux top-bar switch
+Documentation=https://github.com/Nongfsq/uac-linux
+# Started at login by ~/.config/autostart/uac-tray.desktop; stops with the session.
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/local/bin/uac-tray
+# A crash brings the icon back within seconds.
+Restart=on-failure
+RestartSec=3

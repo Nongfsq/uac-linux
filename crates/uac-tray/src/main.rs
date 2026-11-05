@@ -249,6 +249,15 @@ fn perform(handle: &ksni::blocking::Handle<UacTray>, action: Action) {
 }
 
 fn main() {
+    // One icon per session: a second copy exits quietly.
+    let lock_dir = std::env::var_os("XDG_RUNTIME_DIR").map_or_else(std::env::temp_dir, Into::into);
+    let Ok(lock) = std::fs::File::create(Path::new(&lock_dir).join("uac-tray.lock")) else {
+        eprintln!("uac-tray: cannot create its lock file in {}", Path::new(&lock_dir).display());
+        std::process::exit(1);
+    };
+    if lock.try_lock().is_err() {
+        return;
+    }
     uac_i18n::init();
     let (tx, rx) = mpsc::channel();
     let now = Timestamp::now();

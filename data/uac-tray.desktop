@@ -4,7 +4,8 @@ Name=uac-linux
 Name[zh_CN]=临时免密 sudo
 Comment=Top-bar switch for time-limited passwordless sudo
 Comment[zh_CN]=在顶栏开启或关闭限时免密 sudo
-Exec=/usr/local/bin/uac-tray
+# Through systemd so a crash restarts the icon; without the unit, run it directly.
+Exec=sh -c "systemctl --user start uac-tray.service || exec /usr/local/bin/uac-tray"
 Icon=uac-linux
 Terminal=false
 Categories=System;Settings;

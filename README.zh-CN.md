@@ -42,6 +42,7 @@ bash uac-linux/scripts/install.sh
 - 授权就是一条带 `NOTAFTER` 的 sudoers 规则，到点由 sudo 自己失效。
 - 每次开启和关闭都记进 journal（标签 `uac-linux`）。
 - 授权期间，你账户下的所有程序都能用 root。
+- 顶栏开关是 systemd 用户服务 `uac-tray.service`，登录时启动：崩溃后几秒内自动恢复，注销时一起停止（日志：`journalctl --user -u uac-tray`）。重复启动的第二份会自己退出。
 
 ## 语言
 

@@ -42,6 +42,7 @@ Uninstall: `bash scripts/uninstall.sh`
 - The grant is one sudoers rule with `NOTAFTER`, so sudo itself stops honoring it on time.
 - Every grant and revoke is written to the journal (tag `uac-linux`).
 - While a grant is active, every process running as you can use root.
+- The top-bar switch runs as the user unit `uac-tray.service`, started at login: a crash brings it back within seconds and it stops at logout (`journalctl --user -u uac-tray`). A second copy exits quietly.
 
 ## Languages
 

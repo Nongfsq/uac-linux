@@ -48,6 +48,7 @@ sudo install -o root -g root -m 0644 "$REPO/data/io.github.nongfsq.uac-linux.pol
 sudo install -o root -g root -m 0644 "$REPO/data/uac-linux-cleanup.service" /etc/systemd/system/uac-linux-cleanup.service
 sudo install -o root -g root -m 0644 "$REPO/data/uac-linux-cleanup.timer" /etc/systemd/system/uac-linux-cleanup.timer
 sudo install -o root -g root -m 0644 "$REPO/data/uac-tray.desktop" /usr/share/applications/uac-tray.desktop
+sudo install -o root -g root -m 0644 "$REPO/data/uac-tray.service" /etc/systemd/user/uac-tray.service
 sudo install -D -o root -g root -m 0644 "$REPO/data/icons/uac-linux.svg" "$ICONS/scalable/apps/uac-linux.svg"
 for s in on off; do
   sudo install -D -o root -g root -m 0644 "$REPO/data/icons/uac-linux-$s-symbolic.svg" \
@@ -73,9 +74,13 @@ say "Tray autostart for $TARGET_USER"
 home="$(getent passwd "$TARGET_USER" | cut -d: -f6)"
 sudo -u "$TARGET_USER" install -D -m 0644 "$REPO/data/uac-tray.desktop" "$home/.config/autostart/uac-tray.desktop"
 if [[ "$TARGET_USER" == "$(id -un)" && -n "${DBUS_SESSION_BUS_ADDRESS:-}" ]]; then
+  systemctl --user daemon-reload
+  # A copy started outside the unit (older installs) would hold the lock.
   pkill -u "$TARGET_USER" -x uac-tray 2>/dev/null || true
   pkill -u "$TARGET_USER" -f '/usr/local/bin/uac-tray' 2>/dev/null || true
-  setsid -f /usr/local/bin/uac-tray >/dev/null 2>&1 < /dev/null
+  sleep 0.3
+  systemctl --user restart uac-tray.service
+  echo "  uac-tray.service: $(systemctl --user is-active uac-tray.service)"
 fi
 
 say "Checks"
